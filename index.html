@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Milkshake Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom animations */
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        
+        .card-delay-1 { animation-delay: 0.1s; }
+        .card-delay-2 { animation-delay: 0.2s; }
+        .card-delay-3 { animation-delay: 0.3s; }
+        .card-delay-4 { animation-delay: 0.4s; }
+        .card-delay-5 { animation-delay: 0.5s; }
+        .card-delay-6 { animation-delay: 0.6s; }
+        
+        /* Modern Gradient backgrounds */
+        .gradient-1 { background: linear-gradient(135deg, #4f46e5, #9333ea); }
+        .gradient-2 { background: linear-gradient(135deg, #4f46e5, #9333ea); }
+        .gradient-3 { background: linear-gradient(135deg, #4f46e5, #9333ea); }
+        .gradient-4 { background: linear-gradient(135deg, #4f46e5, #9333ea); }
+        .gradient-5 { background: linear-gradient(135deg, #4f46e5, #9333ea); }
+        .gradient-6 { background: linear-gradient(135deg, #4f46e5, #9333ea); }
+        
+        /* Dark body background with gray gradient */
+        body {
+            background: linear-gradient(135deg, #000000, #1a1a1a, #2d2d2d, #404040);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Small golden stars */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(3px 3px at 25px 15px, #ffd700, transparent),
+                radial-gradient(4px 4px at 75px 25px, #ffed4e, transparent),
+                radial-gradient(3px 3px at 120px 40px, #fff8dc, transparent),
+                radial-gradient(4px 4px at 45px 60px, #ffd700, transparent),
+                radial-gradient(3px 3px at 90px 80px, #ffed4e, transparent),
+                radial-gradient(4px 4px at 150px 100px, #fff8dc, transparent),
+                radial-gradient(3px 3px at 30px 120px, #ffd700, transparent),
+                radial-gradient(4px 4px at 180px 30px, #ffed4e, transparent),
+                radial-gradient(3px 3px at 200px 90px, #ffd700, transparent),
+                radial-gradient(4px 4px at 60px 140px, #fff8dc, transparent),
+                radial-gradient(3px 3px at 100px 170px, #ffd700, transparent),
+                radial-gradient(4px 4px at 140px 200px, #ffed4e, transparent);
+            background-repeat: repeat;
+            background-size: 250px 250px;
+            animation: twinkle 3s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        
+        /* Card improvements - Ultra Transparent with Thick Shimmer Border */
+        .bg-white {
+            background: transparent !important;
+            backdrop-filter: blur(2px);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: none;
+            animation: floating 6s ease-in-out infinite;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
+        }
+        
+        /* Shimmer Border Effect - Only on Border Line */
+        .bg-white::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 20px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                transparent 30%,
+                rgba(255, 255, 255, 1) 35%,
+                rgba(255, 255, 255, 1) 40%,
+                rgba(255, 255, 255, 1) 45%,
+                rgba(255, 255, 255, 1) 50%,
+                rgba(255, 255, 255, 1) 55%,
+                rgba(255, 255, 255, 1) 60%,
+                rgba(255, 255, 255, 1) 65%,
+                transparent 70%,
+                transparent 100%
+            );
+            background-size: 200% 100%;
+            animation: shimmerMove 3s linear infinite;
+            z-index: -1;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            filter: blur(5px);
+        }
+        
+        @keyframes shimmerMove {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+        
+        .bg-white:hover {
+            background: rgba(0, 0, 0, 0.02) !important;
+            box-shadow: 0 1px 4px rgba(255, 215, 0, 0.05);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        
+        .bg-white:hover::before {
+            animation-duration: 1.5s;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                transparent 35%,
+                rgba(255, 255, 255, 1) 40%,
+                rgba(255, 255, 255, 1) 45%,
+                rgba(255, 255, 255, 1) 50%,
+                rgba(255, 255, 255, 1) 55%,
+                rgba(255, 255, 255, 1) 60%,
+                transparent 65%,
+                transparent 100%
+            );
+        }
+        
+        /* Floating Animation */
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Glow Effect for Cards */
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.1);
+        }
+        
+        /* Button Hover Animations */
+        .instagram-gradient, .whatsapp-bg {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instagram-gradient:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .whatsapp-bg:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Moving Stars Animation */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 50px 20px, #ffd700, transparent),
+                radial-gradient(1px 1px at 150px 80px, #ffed4e, transparent),
+                radial-gradient(2px 2px at 250px 120px, #fff8dc, transparent),
+                radial-gradient(1px 1px at 350px 60px, #ffd700, transparent),
+                radial-gradient(1px 1px at 450px 180px, #ffed4e, transparent);
+            background-repeat: repeat;
+            background-size: 500px 500px;
+            animation: moveStars 20s linear infinite;
+            z-index: -2;
+        }
+        
+        @keyframes moveStars {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-100px) translateY(-50px); }
+        }
+        
+        /* Gallery Hover Effects - Modern */
+        .album-thumbnail {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        .album-thumbnail:hover {
+            transform: scale(1.08) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+        
+        .album-thumbnail:hover img {
+            filter: brightness(1.3) contrast(1.2) saturate(1.1);
+            transform: scale(1.05);
+        }
+        
+        .album-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                transparent 0%,
+                rgba(255, 215, 0, 0.1) 50%,
+                transparent 100%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .album-thumbnail:hover::before {
+            opacity: 1;
+        }
+        
+        /* Enhanced Glass Effect */
+        .glass-enhanced {
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+        
+        /* Full Width Gallery Grid - Override All */
+        .portfolio-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 1rem !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .portfolio-grid .album-thumbnail {
+            width: 100% !important;
+            max-width: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Card Hover Animations */
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: left 0.5s ease;
+            z-index: 1;
+        }
+        
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl:hover::before {
+            left: 100%;
+        }
+        
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+        }
+        
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl:hover h3 {
+            transform: translateX(5px);
+            color: #ffd700;
+            transition: all 0.3s ease;
+        }
+        
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl:hover p {
+            transform: translateX(3px);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+        
+        /* Email text fix */
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl p {
+            word-wrap: break-word;
+            word-break: break-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl:hover p {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: unset;
+        }
+        
+        /* Instagram gradient */
+        .instagram-gradient {
+            background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+        }
+        
+        /* WhatsApp button */
+        .whatsapp-bg {
+            background: #25D366;
+        }
+        
+        /* Icon color consistency */
+        .icon-purple {
+            color: #6366f1;
+        }
+        
+        /* Hover effects */
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Modal/Album Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-nav:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .modal-prev {
+            left: 20px;
+        }
+        
+        .modal-next {
+            right: 20px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+        
+        .modal-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Album thumbnail hover effect */
+        .album-thumbnail {
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .album-thumbnail::after {
+            content: 'Lihat Album';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .album-thumbnail:hover::after {
+            opacity: 1;
+        }
+        
+        /* Responsive Design */
+        /* Mobile First Approach */
+        
+        /* Mobile Styles (Default) */
+        .container {
+            max-width: 100%;
+            padding: 1rem;
+        }
+        
+        .mobile-only {
+            display: block;
+        }
+        
+        .desktop-only {
+            display: none;
+        }
+        
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+                padding: 1.5rem;
+            }
+            
+            .mobile-only {
+                display: none;
+            }
+            
+            .desktop-only {
+                display: block;
+            }
+        }
+        
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1200px;
+                padding: 2rem;
+            }
+            
+            /* Desktop Layout - 2 Column Grid */
+            .desktop-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                align-items: start;
+            }
+            
+            .desktop-grid .card-full {
+                grid-column: 1 / -1;
+            }
+            
+            /* Enhanced Desktop Hover Effects */
+            .desktop-only .hover-scale:hover {
+                transform: translateY(-8px) scale(1.03);
+                box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            }
+            
+            /* Desktop Typography */
+            .desktop-only h1 {
+                font-size: 2.5rem;
+            }
+            
+            .desktop-only h2 {
+                font-size: 2rem;
+            }
+            
+            /* Desktop Portfolio Grid */
+            .desktop-only .portfolio-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+            
+            /* Desktop Testimonial Layout */
+            .desktop-only .testimonial-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            
+            /* Desktop Contact Layout */
+            .desktop-only .contact-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+        
+        /* Mobile Contact Layout - Fixed */
+        .mobile-only .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+        
+        /* Mobile Hover Effects - Touch Devices */
+        @media (hover: none) {
+            .mobile-only .hover-scale {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            
+            .mobile-only .hover-scale:active {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            }
+            
+            .mobile-only .instagram-gradient:active {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+            }
+            
+            .mobile-only .whatsapp-bg:active {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            }
+            
+            /* Profile Photo Hover Effects */
+            .mobile-only .profile-photo {
+                transition: all 0.3s ease;
+                cursor: move;
+            }
+            
+            .mobile-only .profile-photo:hover {
+                transform: scale(1.05) rotate(2deg);
+                box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+                border-color: #6366f1 !important;
+            }
+            
+            .mobile-only .profile-photo.dragging {
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 0 20px 45px rgba(99, 102, 241, 0.4);
+                border-color: #6366f1 !important;
+            }
+        }
+        
+        /* Desktop Hover - Mouse Available */
+        @media (hover: hover) {
+            .mobile-only .hover-scale:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            }
+            
+            .mobile-only .instagram-gradient:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+            }
+            
+            .mobile-only .whatsapp-bg:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            }
+            
+            /* Profile Photo Hover Effects - Desktop */
+            .desktop-only .profile-photo {
+                transition: all 0.3s ease;
+                cursor: move;
+            }
+            
+            .desktop-only .profile-photo:hover {
+                transform: scale(1.05) rotate(2deg);
+                box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+                border-color: #6366f1 !important;
+            }
+            
+            .desktop-only .profile-photo.dragging {
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 0 20px 45px rgba(99, 102, 241, 0.4);
+                border-color: #6366f1 !important;
+            }
+        }
+        
+        /* Mobile touch hover class */
+        .mobile-only .touch-hover {
+            transform: translateY(-5px) scale(1.02) !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+        
+        .mobile-only .instagram-gradient.touch-hover {
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4) !important;
+        }
+        
+        .mobile-only .whatsapp-bg.touch-hover {
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4) !important;
+        }
+        
+        /* Fix for mobile select options */
+        @media (max-width: 768px) {
+            select {
+                font-size: 16px !important;
+                -webkit-appearance: menulist !important;
+                -moz-appearance: menulist !important;
+                appearance: menulist !important;
+                pointer-events: auto !important;
+                touch-action: manipulation !important;
+            }
+            
+            select option {
+                font-size: 16px !important;
+                padding: 12px !important;
+                min-height: 44px !important;
+                pointer-events: auto !important;
+                -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+            }
+            
+            /* Force native dropdown on iOS */
+            select:focus {
+                outline: none !important;
+                border-color: #6366f1 !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    
+    <!-- Container -->
+    <div class="container mx-auto py-8">
+        
+        <!-- Mobile Version -->
+        <div class="mobile-only">
+            <!-- Kartu 1: Intro -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-6 hover-scale slide-up card-delay-1 gradient-1 text-white">
+                <div class="text-center">
+                    <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg profile-photo" id="profilePhotoMobile">
+                        <img src="image/Profile.png" alt="Profile" class="w-full h-full object-cover">
+                    </div>
+                    <h1 class="text-4xl font-bold mb-3">Adip Setiaputra</h1>
+                    <p class="text-xl opacity-90 mb-2">Inpo Gabut</p>
+                    <p class="text-xl opacity-90 mb-2">Ngopi? gass, Healing? Gass. Atur Jadwal Cocok Langsung Budal.</p>
+                    <p class="text-base opacity-80 leading-relaxed max-w-2xl mx-auto text-gray-600">
+                        ojo dijak golek yang sek.sek pengen seng ndeingi soale.Jak en liane lek iso golek duek ae
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kartu 2: Sosmed -->
+            <div class="bg-white rounded-3xl shadow-xl p-6 mb-6 hover-scale slide-up card-delay-2">
+                <h2 class="text-2xl font-bold mb-4 text-center" style="color: #6366f1;">
+                    <i class="fas fa-share-alt icon-purple mr-2"></i>Sosmed
+                </h2>
+                <div class="space-y-4">
+                    <a href="https://instagram.com/iamsetia23" target="_blank" class="block instagram-gradient text-white rounded-xl p-5 text-center font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+                        <i class="fab fa-instagram mr-2"></i>Instagram
+                    </a>
+                    <a href="https://wa.me/6287740785410" target="_blank" class="block whatsapp-bg text-white rounded-xl p-5 text-center font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kartu 3: Galeri / Highlight -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-6 hover-scale slide-up card-delay-3">
+                <div class="flex items-center justify-center mb-6">
+                    <i class="fas fa-images icon-purple text-3xl"></i>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="relative group cursor-pointer album-thumbnail" onclick="openAlbum('ngopi')">
+                        <img src="image/Ngopi/ngopi1.jpg" alt="Ngopi" class="w-full h-40 object-cover rounded-xl transition-transform duration-400">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                <h4 class="text-white font-bold text-base mb-1">Ngopi Time</h4>
+                                <p class="text-white/80 text-sm">12 Photos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group cursor-pointer album-thumbnail" onclick="openAlbum('healing')">
+                        <img src="image/healing/healing1.png" alt="Healing" class="w-full h-40 object-cover rounded-xl transition-transform duration-400">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                <h4 class="text-white font-bold text-base mb-1">Healing Vibes</h4>
+                                <p class="text-white/80 text-sm">14 Photos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group cursor-pointer album-thumbnail" onclick="openAlbum('hobi')">
+                        <img src="image/Hobi/Hobi1.png" alt="Hobi" class="w-full h-40 object-cover rounded-xl transition-transform duration-400">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                <h4 class="text-white font-bold text-base mb-1">My Hobby</h4>
+                                <p class="text-white/80 text-sm">8 Photos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu 4: Aktivitas / Minat -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-6 hover-scale slide-up card-delay-4 gradient-4 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center text-white">
+                    <i class="fas fa-heart mr-2"></i>Aktivitas / Minat
+                </h2>
+                <div class="space-y-4">
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 cursor-pointer hover:bg-opacity-30 transition-all duration-300" onclick="openTravelBooking()">
+                        <h3 class="font-bold text-xl mb-2">
+                            Jadwal healing/ngopi
+                        </h3>
+                        <p class="text-sm opacity-90">Inpo healing,Ngopi Tinggal Klik Atur jadwal Gek budal</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 cursor-pointer hover:bg-opacity-30 transition-all duration-300" onclick="openMusicPlaylist()">
+                        <h3 class="font-bold text-xl mb-2">
+                            <i class="fas fa-music mr-2 text-green-400"></i>Music
+                        </h3>
+                        <p class="text-sm opacity-90">Lagu Favorit Saat ini </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu 5: Kontak -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-6 hover-scale slide-up card-delay-6 gradient-6 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center text-white">
+                    <i class="fas fa-envelope mr-2"></i>Hubungi Saya
+                </h2>
+                <div class="contact-grid">
+                    <a href="https://wa.me/6287740785410" target="_blank" class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 text-center hover:bg-opacity-30 transition-all duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-12 h-12 mx-auto mb-3">
+                        <p class="font-semibold">WhatsApp</p>
+                        <p class="text-sm opacity-90 hidden">+62 877-4078-5410</p>
+                    </a>
+                    <a href="mailto:AdipGanteng@gmail.com" class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 text-center hover:bg-opacity-30 transition-all duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" class="w-12 h-12 mx-auto mb-3">
+                        <p class="font-semibold">Email</p>
+                        <p class="text-sm opacity-90">AdipGanteng@gmail.com</p>
+                    </a>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5">
+                        <form class="space-y-4">
+                            <input type="text" placeholder="Nama Anda" class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-opacity-30 transition-all duration-300">
+                            <textarea placeholder="Pesan Anda" rows="3" class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-opacity-30 transition-all duration-300 resize-none"></textarea>
+                            <button type="submit" class="w-full bg-yellow-400 text-gray-800 font-semibold py-2 rounded-lg hover:bg-yellow-300 transition-all duration-300">
+                                Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Version -->
+        <div class="desktop-only">
+            <div class="desktop-grid">
+                <!-- Kartu 1: Intro - Full Width -->
+                <div class="bg-white rounded-3xl shadow-xl p-12 hover-scale slide-up card-delay-1 gradient-1 text-white card-full">
+                    <div class="text-center">
+                        <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg profile-photo" id="profilePhotoDesktop">
+                            <img src="image/Profile.png" alt="Profile" class="w-full h-full object-cover">
+                        </div>
+                        <h1 class="text-4xl font-bold mb-3">Adip Setiaputra</h1>
+                        <p class="text-xl opacity-90 mb-2">Inpo Gabut</p>
+                        <p class="text-xl opacity-90 mb-2">Ngopi? gass,Healing? Gass.Atur Jadwal Cocok Langsung Budal.</p>
+                        <p class="text-base opacity-80 leading-relaxed max-w-2xl mx-auto text-gray-600"> 
+                            ojo dijak golek yang sek.sek pengen seng ndeingi soale.Jak en liane lek iso golek duek ae
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kartu 2: Sosmed -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 hover-scale slide-up card-delay-2">
+                    <h2 class="text-2xl font-bold mb-6 text-center" style="color: #6366f1;">
+                        <i class="fas fa-share-alt icon-purple mr-2"></i>Sosmed
+                    </h2>
+                    <div class="space-y-4">
+                        <a href="https://instagram.com/iamsetia23" target="_blank" class="block instagram-gradient text-white rounded-xl p-5 text-center font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+                            <i class="fab fa-instagram mr-2"></i>Instagram
+                        <a href="https://wa.me/6287740785410" target="_blank" class="block whatsapp-bg text-white rounded-xl p-5 text-center font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+                            <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kartu 3: Galeri / Highlight -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 hover-scale slide-up card-delay-3">
+                    <div class="flex items-center justify-center mb-6">
+                        <i class="fas fa-images icon-purple text-3xl"></i>
+                    </div>
+                    <div class="portfolio-grid">
+                        <div class="relative group cursor-pointer album-thumbnail" onclick="openAlbum('ngopi')">
+                            <img src="image/Ngopi/ngopi1.jpg" alt="Ngopi" class="w-full h-40 object-cover rounded-xl transition-transform duration-400">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-400">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-bold text-base mb-1">Ngopi Time</h4>
+                                    <p class="text-white/80 text-sm">12 Photos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group cursor-pointer album-thumbnail" onclick="openAlbum('healing')">
+                            <img src="image/healing/healing1.png" alt="Healing" class="w-full h-40 object-cover rounded-xl transition-transform duration-400">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-400">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-bold text-base mb-1">Healing Vibes</h4>
+                                    <p class="text-white/80 text-sm">14 Photos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group cursor-pointer album-thumbnail" onclick="openAlbum('hobi')">
+                            <img src="image/Hobi/Hobi1.png" alt="Hobi" class="w-full h-40 object-cover rounded-xl transition-transform duration-400">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-400">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-bold text-base mb-1">Hobby</h4>
+                                    <p class="text-white/80 text-sm">8 Photos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kartu 4: Aktivitas / Minat -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 hover-scale slide-up card-delay-4 gradient-4 text-white">
+                    <h2 class="text-2xl font-bold mb-6 text-center">
+                        <i class=>Atur jadwal Healing/ngopi
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 cursor-pointer hover:bg-opacity-30 transition-all duration-300" onclick="openTravelBooking()">
+                            <h3 class="font-bold text-xl mb-2">
+                                Jadwal healing/ngopi
+                            </h3>
+                            <p class="text-sm opacity-90">Ayo Ajaken Aku dolan/ngopi ben gak nk Omahh ae</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 cursor-pointer hover:bg-opacity-30 transition-all duration-300" onclick="openMusicPlaylist()">
+                            <h3 class="font-bold text-xl mb-2">
+                                <i class="fas fa-music mr-2 text-green-400"></i>Music
+                            </h3>
+                            <p class="text-sm opacity-90">Lagu Favorit Saat ini </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kartu 5: Kontak -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 hover-scale slide-up card-delay-6 gradient-6 text-white">
+                    <h2 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fas fa-envelope mr-2"></i>Hubungi Saya
+                    </h2>
+                    <div class="contact-grid">
+                        <a href="https://wa.me/6287740785410" target="_blank" class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 text-center hover:bg-opacity-30 transition-all duration-300">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-12 h-12 mx-auto mb-3">
+                            <p class="font-semibold">WhatsApp</p>
+                            <p class="text-sm opacity-90 hidden">+62 877-4078-5410</p>
+                        </a>
+                        <a href="mailto:AdipGanteng@gmail.com" class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5 text-center hover:bg-opacity-30 transition-all duration-300">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" class="w-12 h-12 mx-auto mb-3">
+                            <p class="font-semibold">Email</p>
+                            <p class="text-sm opacity-90">AdipGanteng@gmail.com</p>
+                        </a>
+                        <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-5">
+                            <form class="space-y-3">
+                                <input type="text" placeholder="Nama Anda" class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-opacity-30 transition-all duration-300">
+                                <textarea placeholder="Pesan Anda" rows="3" class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-opacity-30 transition-all duration-300 resize-none"></textarea>
+                                <button type="submit" class="w-full bg-yellow-400 text-gray-800 font-semibold py-2 rounded-lg hover:bg-yellow-300 transition-all duration-300">
+                                    Kirim Pesan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center py-4 text-gray-600 text-sm">
+            <p>&copy; Adip Setiaputra .</p>
+            <p class="mt-1">Dibuat Oleh Adip Setiaputra <i class="fas fa-heart text-red-500"></i></p>
+        </div>
+    </div>
+
+    <!-- Travel Booking Modal -->
+    <div id="travelModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl p-8 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <button class="modal-close text-red-500 hover:text-red-700 text-2xl font-bold" onclick="closeTravelBooking()">&times;</button>
+            
+            <h3 class="text-2xl font-bold mb-6 text-center" style="color: #6366f1;">
+                Inpo Healing
+            </h3>
+            
+            <form id="travelForm" class="space-y-4">
+                <div>
+                    <label class="block font-semibold mb-2" style="color: #6366f1;">
+                        <i class="fas fa-user mr-2" style="color: #6366f1;"></i>Nama Anda
+                    </label>
+                    <input type="text" id="travelName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama Anda">
+                </div>
+                
+                <div>
+                    <label class="block font-semibold mb-2" style="color: #6366f1;">
+                        <i class="fas fa-list mr-2" style="color: #6366f1;"></i>Pilih Kategori
+                    </label>
+                    <select id="travelCategory" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateDestinations()">
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="healing">Healing</option>
+                        <option value="ngopi">Ngopi</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block font-semibold mb-2" style="color: #6366f1;">
+                        <i class="fas fa-map-marker-alt mr-2" style="color: #6366f1;"></i>Tempat Tujuan
+                    </label>
+                    <input type="text" id="travelDestinationCustom" placeholder="Atau ketik tempat lain..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2">
+                    <select id="travelDestination" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">-- Pilih Tempat --</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block font-semibold mb-2" style="color: #6366f1;">
+                        <i class="fas fa-calendar mr-2" style="color: #6366f1;"></i>Tanggal Budal
+                    </label>
+                    <input type="date" id="travelDate" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="checkDateAvailability()">
+                    <div id="dateStatus" class="mt-2 text-sm"></div>
+                </div>
+                
+                <div id="cancelSection" style="display: none;">
+                    <label class="block font-semibold mb-2" style="color: #6366f1;">
+                        <i class="fas fa-key mr-2" style="color: #6366f1;"></i>Kode Pembatalan
+                    </label>
+                    <input type="text" id="cancelCode" placeholder="Masukkan kode pembatalan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="button" onclick="cancelBooking()" class="mt-2 w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition-all duration-300">
+                        <i class="fas fa-times mr-2"></i>Batalkan Booking
+                    </button>
+                </div>
+                
+                <div>
+                    <label class="block font-semibold mb-2" style="color: #6366f1;">
+                        <i class="fas fa-users mr-2" style="color: #6366f1;"></i>Jumlah Seng budal
+                    </label>
+                    <input type="number" id="travelParticipants" min="1" max="10" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="1-10 orang">
+                </div>
+                
+                <div>
+                    <label class="block font-semibold mb-2" style="color: #6366f1;">
+                        <i class="fas fa-comment mr-2" style="color: #6366f1;"></i>Pesan Tambahan
+                    </label>
+                    <textarea id="travelMessage" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="kirim pesan tambahan"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300">
+                    <i class="fas fa-paper-plane mr-2"></i>Kirim 
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Album Modal -->
+    <div id="albumModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAlbum()">&times;</button>
+            <button class="modal-nav modal-prev" onclick="previousImage()">&#10094;</button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <button class="modal-nav modal-next" onclick="nextImage()">&#10095;</button>
+            <div id="imageCounter" class="modal-counter">1 / 14</div>
+        </div>
+    </div>
+
+    <!-- Music Playlist Modal -->
+    <div id="musicModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <button class="modal-close text-gray-500 hover:text-gray-700 text-2xl font-bold" onclick="closeMusicPlaylist()">&times;</button>
+            
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-music icon-purple mr-2"></i>Rungokanku
+            </h3>
+            
+            <div class="space-y-3" id="musicList">
+                <!-- Lagu 1 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/1jOASJ1rcIzVvX4QB1z7ze?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 2 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/7p4g03E3yh1ovkMlvj9mwO?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 3 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/2T7hahPqt3ZgvMEBDuVgtd?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 4 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/71ehjl8hLGEqu6EPrl6iHS?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 5 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/7tkOXJNeDNCeX9Jz3K1M3l?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 6 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/1k640hVEX2CnYqB3CX5Cc0?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 7 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/26mwiyfmCKJBneTzlELpun?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 8 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/0wULafSHeHYZFu54R9ZFRJ?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 9 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/09eWF5r8kasfOEp8RFRQLv?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 10 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/4tQEH1s2owu9sk22ksyXyn?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+                <!-- Lagu 11 -->
+                <div class="bg-gray-100 rounded-xl p-3">
+                    <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/4c2OR5RjaVRhAOTqWhXZfQ?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+            
+            <p class="text-xs text-gray-500 text-center mt-4">Click play to listen</p>
+        </div>
+    </div>
+
+    <script>
+        // Set min date to today
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('travelDate').setAttribute('min', today);
+        }
+        
+        // Initialize schedule data from localStorage
+        let scheduleData = JSON.parse(localStorage.getItem('healingSchedule')) || {};
+        
+        // Cancel booking function
+        function cancelBooking() {
+            const date = document.getElementById('travelDate').value;
+            const category = document.getElementById('travelCategory').value;
+            const cancelCode = document.getElementById('cancelCode').value;
+            
+            if (!date || !category) {
+                alert('Silakan pilih tanggal dan kategori terlebih dahulu!');
+                return;
+            }
+            
+            if (!cancelCode) {
+                alert('Silakan masukkan kode pembatalan!');
+                return;
+            }
+            
+            const dateKey = `${date}_${category}`;
+            const booking = scheduleData[dateKey];
+            
+            if (!booking) {
+                alert('Tidak ada booking di tanggal tersebut!');
+                return;
+            }
+            
+            // Simple verification: use name as code (you can change this to any verification method)
+            if (cancelCode.toLowerCase() === booking.name.toLowerCase() || cancelCode === 'cancel123') {
+                // Remove booking
+                delete scheduleData[dateKey];
+                localStorage.setItem('healingSchedule', JSON.stringify(scheduleData));
+                
+                alert(`Booking untuk ${category} tanggal ${date} berhasil dibatalkan!`);
+                
+                // Reset form completely after cancellation
+                document.getElementById('cancelCode').value = '';
+                document.getElementById('travelCategory').value = '';
+                document.getElementById('travelCategory').disabled = false;
+                document.getElementById('travelDestination').value = '';
+                document.getElementById('travelDestination').innerHTML = '<option value="">-- Pilih Tempat --</option>';
+                document.getElementById('travelDestination').disabled = false;
+                document.getElementById('travelDestinationCustom').value = '';
+                document.getElementById('travelDestinationCustom').disabled = false;
+                
+                // Re-check date availability to update status
+                checkDateAvailability();
+            } else {
+                alert('Kode pembatalan salah! Silakan coba lagi.');
+            }
+        }
+        
+        // Check date availability
+        function checkDateAvailability() {
+            const date = document.getElementById('travelDate').value;
+            const category = document.getElementById('travelCategory').value;
+            const dateStatus = document.getElementById('dateStatus');
+            const cancelSection = document.getElementById('cancelSection');
+            const categorySelect = document.getElementById('travelCategory');
+            
+            if (!date) {
+                dateStatus.innerHTML = '';
+                cancelSection.style.display = 'none';
+                // Reset category to editable
+                categorySelect.disabled = false;
+                return;
+            }
+            
+            // Check if date is in the past (for new bookings only)
+            const selectedDate = new Date(date + 'T00:00:00'); // Add time to avoid timezone issues
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set to start of day
+            
+            const isPastDate = selectedDate < today;
+            
+            const healingBooking = scheduleData[`${date}_healing`];
+            const ngopiBooking = scheduleData[`${date}_ngopi`];
+            const existingBooking = healingBooking || ngopiBooking;
+            
+            // Priority 1: Check existing booking first
+            if (existingBooking) {
+                const takenCategory = healingBooking ? 'healing' : 'ngopi';
+                
+                // Auto-select and disable category if booking exists
+                categorySelect.value = takenCategory;
+                categorySelect.disabled = true;
+                
+                // Auto-fill destination based on booking category
+                const destinationSelect = document.getElementById('travelDestination');
+                destinationSelect.innerHTML = '<option value="">-- Pilih Tempat --</option>';
+                
+                if (destinations[takenCategory]) {
+                    destinations[takenCategory].forEach(dest => {
+                        const option = document.createElement('option');
+                        option.value = dest.value;
+                        option.textContent = dest.text;
+                        destinationSelect.appendChild(option);
+                    });
+                    
+                    // Auto-select the booked destination
+                    destinationSelect.value = existingBooking.destination;
+                    destinationSelect.disabled = true;
+                }
+                
+                // Also fill custom input with booked destination
+                document.getElementById('travelDestinationCustom').value = existingBooking.destination;
+                document.getElementById('travelDestinationCustom').disabled = true;
+                
+                dateStatus.innerHTML = `
+                    <div class="text-red-600 font-semibold">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        Tanggal ini sudah diambil untuk ${takenCategory} oleh seseorang (${existingBooking.participants} orang)
+                    </div>
+                `;
+                document.getElementById('travelDate').setCustomValidity('Tanggal sudah di booking');
+                
+                // Show cancel section
+                cancelSection.style.display = 'block';
+            } 
+            // Priority 2: Check past date (but allow category selection for testing)
+            else if (isPastDate) {
+                // Past date with no booking - allow UI interaction
+                categorySelect.disabled = false;
+                document.getElementById('travelDestination').disabled = false;
+                
+                // Reset category when switching to past date
+                categorySelect.value = '';
+                const destinationSelect = document.getElementById('travelDestination');
+                destinationSelect.innerHTML = '<option value="">-- Pilih Tempat --</option>';
+                document.getElementById('travelDestinationCustom').value = '';
+                
+                dateStatus.innerHTML = `
+                    <div class="text-red-600 font-semibold">
+                        <i class="fas fa-times-circle mr-1"></i>
+                        Tanggal ini sudah lewat, tidak bisa melakukan booking
+                    </div>
+                `;
+                document.getElementById('travelDate').setCustomValidity('Tanggal sudah lewat');
+                
+                // Hide cancel section
+                cancelSection.style.display = 'none';
+            } 
+            // Priority 3: Valid date for new booking
+            else {
+                // Enable category and destination for new booking
+                categorySelect.disabled = false;
+                document.getElementById('travelDestination').disabled = false;
+                
+                // Don't reset category when switching to valid date (keep user selection)
+                // Only reset destination if category is empty
+                if (!category) {
+                    const destinationSelect = document.getElementById('travelDestination');
+                    destinationSelect.innerHTML = '<option value="">-- Pilih Tempat --</option>';
+                    document.getElementById('travelDestinationCustom').value = '';
+                } else {
+                    // If category exists, update destinations
+                    updateDestinations();
+                }
+                
+                dateStatus.innerHTML = `
+                    <div class="text-green-600 font-semibold">
+                        <i class="fas fa-check-circle mr-1"></i>
+                        Tanggal tersedia
+                    </div>
+                `;
+                document.getElementById('travelDate').setCustomValidity('');
+                
+                // Hide cancel section
+                cancelSection.style.display = 'none';
+            }
+        }
+        
+        // Also check when category changes
+        function updateDestinations() {
+            const category = document.getElementById('travelCategory').value;
+            const destinationSelect = document.getElementById('travelDestination');
+            
+            // Clear current options
+            destinationSelect.innerHTML = '<option value="">-- Pilih Tempat --</option>';
+            
+            if (category && destinations[category]) {
+                destinations[category].forEach(dest => {
+                    const option = document.createElement('option');
+                    option.value = dest.value;
+                    option.textContent = dest.text;
+                    destinationSelect.appendChild(option);
+                });
+            }
+        }
+        
+        // Add event listener to ensure updateDestinations is called
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('travelCategory');
+            if (categorySelect) {
+                // Force mobile select to work properly
+                categorySelect.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                }, { passive: false });
+                
+                categorySelect.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Force dropdown to open
+                    this.focus();
+                });
+                
+                categorySelect.addEventListener('change', function() {
+                    updateDestinations();
+                });
+                
+                // Ensure select is enabled
+                categorySelect.disabled = false;
+            }
+        });
+        
+        // Remove duplicate event listener since we already have onchange in HTML
+        
+        // Reset category and destination when modal opens
+        function openTravelBooking() {
+            document.getElementById('travelModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Reset category and destination to editable state
+            document.getElementById('travelCategory').disabled = false;
+            document.getElementById('travelDestination').disabled = false;
+            // Set min date to today
+            setMinDate();
+        }
+        
+        // Destination data
+        const destinations = {
+            healing: [
+                { value: 'bromo', text: 'Bromo' },
+                { value: 'pantai', text: 'Pantai' },
+                { value: 'dieng', text: 'Dieng Wonosobo' },
+                { value: 'kelud', text: 'Kelud' },
+                { value: 'jogja', text: 'Jogja' }
+            ],
+            ngopi: [
+                { value: 'starbucks', text: 'Starbucks' },
+                { value: 'kopi-kenangan', text: 'Kopi Kenangan' },
+                { value: 'fore', text: 'Fore ' },
+                { value: 'Could&brew', text: 'Could&brew' },
+                { value: 'Warkop Sopo', text: 'Warkop Sopo' },
+                { value: 'Arions', text: 'Arions' },
+                { value: 'Sraung', text: 'Sraung' },
+                { value: 'Antheng', text: 'Antheng' },
+                { value: 'Calf', text: 'calf' },
+            
+            ]
+        };
+        
+        // Update destinations based on category
+        function updateDestinations() {
+            const category = document.getElementById('travelCategory').value;
+            const destinationSelect = document.getElementById('travelDestination');
+            const customInput = document.getElementById('travelDestinationCustom');
+            
+            // Clear current options
+            destinationSelect.innerHTML = '<option value="">-- Pilih Tempat --</option>';
+            
+            if (category && destinations[category]) {
+                destinations[category].forEach(dest => {
+                    const option = document.createElement('option');
+                    option.value = dest.value;
+                    option.textContent = dest.text;
+                    destinationSelect.appendChild(option);
+                });
+            }
+            
+            // Clear custom input when category changes
+            customInput.value = '';
+            
+            // Re-check date availability after category change
+            checkDateAvailability();
+        }
+        
+        // Event listeners untuk membuat input dan dropdown saling eksklusif
+        document.getElementById('travelDestinationCustom').addEventListener('input', function() {
+            const dropdown = document.getElementById('travelDestination');
+            if (this.value.trim()) {
+                // Jika input diisi, disable dropdown
+                dropdown.disabled = true;
+                dropdown.value = '';
+            } else {
+                // Jika input kosong, enable dropdown
+                dropdown.disabled = false;
+            }
+        });
+        
+        document.getElementById('travelDestination').addEventListener('change', function() {
+            const input = document.getElementById('travelDestinationCustom');
+            if (this.value) {
+                // Jika dropdown dipilih, disable input
+                input.disabled = true;
+                input.value = '';
+            } else {
+                // Jika dropdown kosong, enable input
+                input.disabled = false;
+            }
+        });
+        
+        // Travel booking functions
+        function openTravelBooking() {
+            document.getElementById('travelModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeTravelBooking() {
+            document.getElementById('travelModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Music playlist functions
+        function openMusicPlaylist() {
+            document.getElementById('musicModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMusicPlaylist() {
+            document.getElementById('musicModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Travel form submission
+        document.getElementById('travelForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('travelName').value;
+            const category = document.getElementById('travelCategory').value;
+            // Get destination from custom input if filled, otherwise from dropdown
+            const customDestination = document.getElementById('travelDestinationCustom').value.trim();
+            const selectDestination = document.getElementById('travelDestination').value;
+            const destination = customDestination || selectDestination;
+            const date = document.getElementById('travelDate').value;
+            const participants = document.getElementById('travelParticipants').value;
+            const message = document.getElementById('travelMessage').value;
+            
+            // Check if date is available
+            const dateKey = `${date}_${category}`;
+            const healingBooking = scheduleData[`${date}_healing`];
+            const ngopiBooking = scheduleData[`${date}_ngopi`];
+            const anyBookingOnDate = healingBooking || ngopiBooking;
+            
+            if (anyBookingOnDate) {
+                const takenCategory = healingBooking ? 'healing' : 'ngopi';
+                alert(`Maaf, tanggal tersebut sudah di booking untuk ${takenCategory} oleh seseorang!`);
+                return;
+            }
+            
+            // Save booking to localStorage
+            scheduleData[dateKey] = {
+                name: name,
+                destination: destination,
+                participants: participants,
+                category: category,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('healingSchedule', JSON.stringify(scheduleData));
+            
+            // Get destination text (from custom input if filled, otherwise from dropdown text)
+            const customDestText = document.getElementById('travelDestinationCustom').value.trim();
+            const destinationSelect = document.getElementById('travelDestination');
+            const selectDestText = destinationSelect.options[destinationSelect.selectedIndex].text;
+            const destinationText = customDestText || selectDestText;
+            
+            // Format date
+            const formattedDate = new Date(date).toLocaleDateString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Create WhatsApp message dengan format rapi dan bold
+            const categoryText = category === 'healing' ? 'Healing' : 'Ngopi';
+            
+            // Build message dengan line breaks yang benar untuk WhatsApp
+            const line1 = "*INFO " + categoryText.toUpperCase() + " BARU!*";
+            const line2 = "*Dari:* " + name;
+            const line3 = "*Kategori:* " + categoryText;
+            const line4 = "*Tempat:* " + destinationText;
+            const line5 = "*Tanggal:* " + formattedDate;
+            const line6 = "*Jumlah Peserta:* " + participants + " orang";
+            const line7 = "*Catatan Pembatalan:*";
+            const line8 = "Jika ingin membatalkan, masuk ke Inpo Healing dan masukkan kode " + name + ".";
+            const line9 = "Ayo " + categoryText.toLowerCase() + " bareng! Gas!";
+            
+            // Gabung dengan %0A (URL encoded newline)
+            const whatsappMessage = line1 + "%0A%0A" + line2 + "%0A" + line3 + "%0A" + line4 + "%0A" + line5 + "%0A" + line6 + "%0A%0A" + line7 + "%0A" + line8 + "%0A%0A" + line9;
+            
+            // Send to WhatsApp dengan cache buster
+            const timestamp = new Date().getTime();
+            const whatsappUrl = `https://wa.me/6287740785410?text=${whatsappMessage}&v=${timestamp}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form and close modal
+            this.reset();
+            document.getElementById('dateStatus').innerHTML = '';
+            closeTravelBooking();
+        });
+        
+        // Album data
+        const albums = {
+            ngopi: [
+                'image/Ngopi/ngopi1.jpg',
+                'image/Ngopi/ngopi 2.jpeg'
+            ],
+            healing: [
+                'image/healing/healing1.png',
+                'image/healing/healing2.png',
+                'image/healing/healing3.png',
+                'image/healing/healing4.png',
+                'image/healing/healing5.png'
+            ],
+            hobi: [
+                'image/Hobi/Hobi1.png',
+                'image/Hobi/Hobi2.png',
+                'image/Hobi/Hobi3.png',
+                'image/Hobi/Hobi4.png',
+                'image/Hobi/Hobi5.png',
+                'image/Hobi/Hobi6.png',
+                'image/Hobi/Hobi7.png',
+                'image/Hobi/Hobi8.png'
+            ]
+        };
+        
+        let currentAlbum = '';
+        let currentImageIndex = 0;
+        
+        // Open album function
+        function openAlbum(albumName) {
+            currentAlbum = albumName;
+            currentImageIndex = 0;
+            updateModalImage();
+            document.getElementById('albumModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+        
+        // Close album function
+        function closeAlbum() {
+            document.getElementById('albumModal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore background scroll
+        }
+        
+        // Update modal image
+        function updateModalImage() {
+            const images = albums[currentAlbum];
+            if (images && images[currentImageIndex]) {
+                document.getElementById('modalImage').src = images[currentImageIndex];
+                document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / ${images.length}`;
+            }
+        }
+        
+        // Navigation functions
+        function nextImage() {
+            const images = albums[currentAlbum];
+            if (images) {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateModalImage();
+            }
+        }
+        
+        function previousImage() {
+            const images = albums[currentAlbum];
+            if (images) {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateModalImage();
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('albumModal').classList.contains('active')) {
+                if (e.key === 'Escape') closeAlbum();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') previousImage();
+            }
+        });
+        
+        // Swipe support for touch devices
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.getElementById('modalImage').addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.getElementById('modalImage').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextImage(); // Swipe left
+            if (touchEndX > touchStartX + 50) previousImage(); // Swipe right
+        }
+        
+         // Form submission handler
+         document.querySelector('form').addEventListener('submit', function(e) {
+             e.preventDefault();
+             alert('Terima kasih! Pesan Anda telah terkirim.');
+             this.reset();
+         });
+
+         // Add smooth scroll behavior
+         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+             anchor.addEventListener('click', function (e) {
+                 e.preventDefault();
+                 const target = document.querySelector(this.getAttribute('href'));
+                 if (target) {
+                     target.scrollIntoView({ behavior: 'smooth' });
+                 }
+             });
+         });
+
+         // Add intersection observer for animations
+         const observerOptions = {
+             threshold: 0.1,
+             rootMargin: '0px 0px -50px 0px'
+         };
+
+         const observer = new IntersectionObserver((entries) => {
+             entries.forEach(entry => {
+                 if (entry.isIntersecting) {
+                     entry.target.style.opacity = '1';
+                     entry.target.style.transform = 'translateY(0)';
+                 }
+             });
+         }, observerOptions);
+
+         document.querySelectorAll('.slide-up').forEach(el => {
+             el.style.opacity = '0';
+             el.style.transform = 'translateY(20px)';
+             observer.observe(el);
+         });
+         
+         // Mobile touch hover effects - hover saat jari mendekati
+         if (window.matchMedia('(pointer: coarse)').matches) {
+             const touchElements = document.querySelectorAll('.mobile-only .hover-scale, .mobile-only .instagram-gradient, .mobile-only .whatsapp-bg, .mobile-only .bg-white.bg-opacity-20.backdrop-blur-sm.rounded-xl');
+             
+             // Touch move - hover saat jari bergerak mendekati
+             document.addEventListener('touchmove', function(e) {
+                 const touch = e.touches[0];
+                 touchElements.forEach(el => {
+                     const rect = el.getBoundingClientRect();
+                     const distance = Math.sqrt(
+                         Math.pow(touch.clientX - (rect.left + rect.width/2), 2) + 
+                         Math.pow(touch.clientY - (rect.top + rect.height/2), 2)
+                     );
+                     // Hover jika jarak < 100px dari elemen
+                     if (distance < 100) {
+                         el.classList.add('touch-hover');
+                     } else {
+                         el.classList.remove('touch-hover');
+                     }
+                 });
+             }, { passive: true });
+             
+             // Touch end - hapus semua hover
+             document.addEventListener('touchend', function() {
+                 touchElements.forEach(el => el.classList.remove('touch-hover'));
+             });
+         }
+         
+         // Profile Photo Drag Functionality
+         function initProfileDrag() {
+             const profilePhotos = document.querySelectorAll('.profile-photo');
+             
+             profilePhotos.forEach(photo => {
+                 let isDragging = false;
+                 let currentX;
+                 let currentY;
+                 let initialX;
+                 let initialY;
+                 let xOffset = 0;
+                 let yOffset = 0;
+                 
+                 // Reset position to center on load
+                 photo.style.position = 'relative';
+                 photo.style.left = '0px';
+                 photo.style.top = '0px';
+                 
+                 function dragStart(e) {
+                     if (e.type === "touchstart") {
+                         initialX = e.touches[0].clientX - xOffset;
+                         initialY = e.touches[0].clientY - yOffset;
+                     } else {
+                         initialX = e.clientX - xOffset;
+                         initialY = e.clientY - yOffset;
+                     }
+                     
+                     if (e.target === photo || photo.contains(e.target)) {
+                         isDragging = true;
+                         photo.classList.add('dragging');
+                     }
+                 }
+                 
+                 function dragEnd(e) {
+                     initialX = currentX;
+                     initialY = currentY;
+                     isDragging = false;
+                     photo.classList.remove('dragging');
+                 }
+                 
+                 function drag(e) {
+                     if (isDragging) {
+                         e.preventDefault();
+                         
+                         if (e.type === "touchmove") {
+                             currentX = e.touches[0].clientX - initialX;
+                             currentY = e.touches[0].clientY - initialY;
+                         } else {
+                             currentX = e.clientX - initialX;
+                             currentY = e.clientY - initialY;
+                         }
+                         
+                         xOffset = currentX;
+                         yOffset = currentY;
+                         
+                         photo.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.05) rotate(2deg)`;
+                     }
+                 }
+                 
+                 // Mouse events
+                 photo.addEventListener('mousedown', dragStart);
+                 document.addEventListener('mouseup', dragEnd);
+                 document.addEventListener('mousemove', drag);
+                 
+                 // Touch events
+                 photo.addEventListener('touchstart', dragStart);
+                 document.addEventListener('touchend', dragEnd);
+                 document.addEventListener('touchmove', drag);
+                 
+                 // Double click to reset position
+                 photo.addEventListener('dblclick', function() {
+                     photo.style.transform = 'translate(0px, 0px) scale(1)';
+                     xOffset = 0;
+                     yOffset = 0;
+                 });
+             });
+         }
+         
+         // Initialize drag functionality
+         initProfileDrag();
+     </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+        
+        // Event listeners untuk membuat input dan dropdown saling eksklusif
+        document.getElementById('travelDestinationCustom').addEventListener('input', function() {
+            const dropdown = document.getElementById('travelDestination');
+            if (this.value.trim()) {
+                // Jika input diisi, disable dropdown
+                dropdown.disabled = true;
+                dropdown.value = '';
+            } else {
+                // Jika input kosong, enable dropdown
+                dropdown.disabled = false;
+            }
+        });
+        
+        document.getElementById('travelDestination').addEventListener('change', function() {
+            const input = document.getElementById('travelDestinationCustom');
+            if (this.value) {
+                // Jika dropdown dipilih, disable input
+                input.disabled = true;
+                input.value = '';
+            } else {
+                // Jika dropdown kosong, enable input
+                input.disabled = false;
+            }
+        });
+        
+        // Travel booking functions
